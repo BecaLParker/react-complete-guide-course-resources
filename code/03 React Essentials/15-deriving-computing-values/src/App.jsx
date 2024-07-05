@@ -18,6 +18,20 @@ function App() {
 
   console.log('APP COMPONENT EXECUTING');
 
+  let tabContent = <p>Select a topic to see an example</p>;
+  
+  if (selectedTopic) {tabContent = (
+      <div id="tab-content">
+        <h3>{EXAMPLES[selectedTopic].title}</h3>
+        <p>{EXAMPLES[selectedTopic].description}</p>
+        <pre>
+          <code>{EXAMPLES[selectedTopic].code}</code>
+        </pre>
+      </div>
+    );
+  }
+    
+      
   return (
     <div>
       <Header />
@@ -46,16 +60,7 @@ function App() {
             <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
           {/*only output this tab content if selectedTopic is not null*/}
-          {!selectedTopic ? <p>Select a topic to see an example</p> : 
-              <div id="tab-content">
-            <h3>{EXAMPLES[selectedTopic].title}</h3>
-            <p>{EXAMPLES[selectedTopic].description}</p>
-            <pre>
-              <code>{EXAMPLES[selectedTopic].code}</code>
-            </pre>
-          </div>}
-         
-          
+          {tabContent}
         </section>
       </main>
     </div>
