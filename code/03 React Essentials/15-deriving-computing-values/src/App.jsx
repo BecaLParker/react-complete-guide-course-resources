@@ -7,7 +7,8 @@ import TabButton from './components/TabButton.jsx';
 import { EXAMPLES } from './data.js';
 
 function App() {
-  const [selectedTopic, setSelectedTopic] = useState('components');
+  //If we don't want to set initial state to components...
+  const [selectedTopic, setSelectedTopic] = useState('');
 
   function handleSelect(selectedButton) {
     // selectedButton => 'components', 'jsx', 'props', 'state'
@@ -44,13 +45,17 @@ function App() {
             <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
             <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
-          <div id="tab-content">
+          {/*only output this tab content if selectedTopic is not null*/}
+          {!selectedTopic ? <p>Select a topic to see an example</p> : 
+              <div id="tab-content">
             <h3>{EXAMPLES[selectedTopic].title}</h3>
             <p>{EXAMPLES[selectedTopic].description}</p>
             <pre>
               <code>{EXAMPLES[selectedTopic].code}</code>
             </pre>
-          </div>
+          </div>}
+         
+          
         </section>
       </main>
     </div>
